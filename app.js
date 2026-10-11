@@ -1,6 +1,7 @@
 const gameBoard = (() => {
     const board = [];
-    for (let i = 0; i < 9; i++) {
+    const cells = 9;
+    for (let i = 0; i < cells; i++) {
         board.push('');
     }
 
@@ -22,3 +23,23 @@ const gameBoard = (() => {
         clearBoard,
     };
 })();
+
+const playerFactory = (player, marker) => {
+    return {
+        getPlayerName() {
+            console.log(player);
+            return player;
+        },
+
+        getPlayerMarker() {
+            console.log(marker);
+            return marker;
+        },
+    };
+};
+
+const playerX = playerFactory('Adesola', 'X');
+const playerO = playerFactory('Muyiwa', 'O');
+
+playerX.getPlayerName();
+playerX.getPlayerMarker();
