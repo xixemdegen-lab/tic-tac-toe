@@ -1,3 +1,4 @@
+// Create a Gameboard module using an IIFE.
 const gameBoard = (() => {
     const board = [];
     const cells = 9;
@@ -5,41 +6,37 @@ const gameBoard = (() => {
         board.push('');
     }
 
-    const boardState = function () {
-        console.log([...board]);
-        return [...board];
+    const readBoard = () => {
+        const readOnly = [...board];
+        return readOnly;
     };
-    const boardEntries = function (index, marker) {
-        if (!(index in board) || board[index] !== '') return;
-        board[index] = marker.toUpperCase();
+
+    let moveStatus;
+    const fillBoard = (position, marker) => {
+        if (!(position in board) || board[position] !== '') {
+            moveStatus = false;
+            alert(`Invalid Move `);
+            return;
+        }
+
+        board[position] = marker;
+        moveStatus = true;
+        console.log(board);
+        // console.log(moveStatus);
     };
-    const clearBoard = function () {
+    const getMoveStats = () => {
+        return moveStatus;
+    };
+
+    const clearBoard = () => {
         board.fill('');
+        console.log(board);
     };
 
     return {
-        boardState,
-        boardEntries,
+        readBoard,
+        fillBoard,
         clearBoard,
+        getMoveStats,
     };
 })();
-
-const playerFactory = (player, marker) => {
-    return {
-        getPlayerName() {
-            console.log(player);
-            return player;
-        },
-
-        getPlayerMarker() {
-            console.log(marker);
-            return marker;
-        },
-    };
-};
-
-const playerX = playerFactory('Adesola', 'X');
-const playerO = playerFactory('Muyiwa', 'O');
-
-playerX.getPlayerName();
-playerX.getPlayerMarker();
