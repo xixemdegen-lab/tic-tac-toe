@@ -1,4 +1,6 @@
-// Create a Gameboard module using an IIFE.
+// --------------------------------PHASE 1 ---------------------
+
+// STEP 1 — GAMEBOARD MODULE
 const gameBoard = (() => {
     const board = [];
     const cells = 9;
@@ -40,3 +42,19 @@ const gameBoard = (() => {
         getMoveStats,
     };
 })();
+
+// STEP 2 — PLAYER FACTORY
+const createPlayer = (_name, _marker) => {
+    const playerName = () => {
+        return _name;
+    };
+
+    const playerMarker = () => {
+        return _marker;
+    };
+
+    return {
+        playerName,
+        playerMarker,
+    };
+};
