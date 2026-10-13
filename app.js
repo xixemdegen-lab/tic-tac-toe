@@ -69,11 +69,9 @@ const gameController = (() => {
         aTie: false,
     };
 
-    let currentPlayer = newPlayer1.playerName();
+    let currentPlayer = newPlayer1;
     const switchPlayer = () => {
-        currentPlayer === newPlayer1.playerName() ? (currentPlayer = newPlayer2.playerName()) : (currentPlayer = newPlayer1.playerName());
-
-        // console.log(currentPlayer);
+        currentPlayer === newPlayer1 ? (currentPlayer = newPlayer2) : (currentPlayer = newPlayer1);
     };
 
     const getCurrentPlayer = () => {
@@ -91,5 +89,19 @@ const gameController = (() => {
         getCurrentPlayer,
         setGameStatus,
         getGameStatus,
+        switchPlayer,
     };
 })();
+
+// STEP 4 — MAKING A MOVE
+const makeAmove = (position) => {
+    if (gameController.getGameStatus('finished') === true) return;
+
+    gameBoard.fillBoard(position, gameController.getCurrentPlayer().playerMarker());
+
+    if (gameBoard.getMoveStats()) {
+        gameController.switchPlayer();
+    }
+
+    // The winning condition goes below
+};
