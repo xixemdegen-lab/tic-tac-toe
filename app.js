@@ -44,13 +44,13 @@ const gameBoard = (() => {
 })();
 
 // STEP 2 — PLAYER FACTORY
-const createPlayer = (_name, _marker) => {
+const createPlayer = (name, marker) => {
     const playerName = () => {
-        return _name;
+        return name;
     };
 
     const playerMarker = () => {
-        return _marker;
+        return marker;
     };
 
     return {
@@ -58,3 +58,38 @@ const createPlayer = (_name, _marker) => {
         playerMarker,
     };
 };
+
+// STEP 3 — GAME CONTROLLER MODULE
+const gameController = (() => {
+    const newPlayer1 = createPlayer('PlayerX', 'x');
+    const newPlayer2 = createPlayer('PlayerO', 'o');
+    const gameStatus = {
+        finished: false,
+        haveAWinner: false,
+        aTie: false,
+    };
+
+    let currentPlayer = newPlayer1.playerName();
+    const switchPlayer = () => {
+        currentPlayer === newPlayer1.playerName() ? (currentPlayer = newPlayer2.playerName()) : (currentPlayer = newPlayer1.playerName());
+
+        // console.log(currentPlayer);
+    };
+
+    const getCurrentPlayer = () => {
+        return currentPlayer;
+    };
+
+    const setGameStatus = (status, value) => {
+        gameStatus[status] = value;
+    };
+    const getGameStatus = (status) => {
+        return gameStatus[status];
+    };
+
+    return {
+        getCurrentPlayer,
+        setGameStatus,
+        getGameStatus,
+    };
+})();
