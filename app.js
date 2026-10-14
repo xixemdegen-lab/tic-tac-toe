@@ -100,8 +100,38 @@ const makeAmove = (position) => {
     gameBoard.fillBoard(position, gameController.getCurrentPlayer().playerMarker());
 
     if (gameBoard.getMoveStats()) {
+        checkWin();
         gameController.switchPlayer();
     }
-
-    // The winning condition goes below
 };
+
+// STEP 6 — CHECKING FOR A WIN [Step 5 is switching player logic which alreeady did]
+function checkWin() {
+    const winingcombinations = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+    ];
+
+    const seeBoard = gameBoard.readBoard();
+    const playerMark = gameController.getCurrentPlayer().playerMarker();
+
+    const win = winingcombinations.some((combo) =>
+        combo.every((index) => {
+            return seeBoard[index] === playerMark;
+        }),
+    );
+
+    if (win) {
+        gameController.setGameStatus('finished', true);
+        gameController.setGameStatus('haveAWinner', true);
+        console.log(playerMark + ' ' + 'wins');
+    } else {
+        console.log('No winner yet');
+    }
+}
