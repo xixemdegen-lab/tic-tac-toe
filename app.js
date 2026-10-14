@@ -128,10 +128,18 @@ function checkWin() {
     );
 
     if (win) {
-        gameController.setGameStatus('finished', true);
         gameController.setGameStatus('haveAWinner', true);
+        gameController.setGameStatus('finished', true);
         console.log(playerMark + ' ' + 'wins');
     } else {
-        console.log('No winner yet');
+        const tie = seeBoard.every((cell) => {
+            return cell !== '';
+        });
+
+        if (tie) {
+            gameController.setGameStatus('aTie', true);
+            gameController.setGameStatus('finished', true);
+            console.log('A tie');
+        }
     }
 }
