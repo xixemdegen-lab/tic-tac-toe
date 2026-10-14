@@ -154,14 +154,3 @@ function checkWin() {
 }
 makeAmove(0);
 makeAmove(1);
-makeAmove(2);
-makeAmove(4);
-makeAmove(3);
-makeAmove(5);
-makeAmove(7);
-makeAmove(6);
-makeAmove(8);
-gameController.restartGame();
-makeAmove(2);
-makeAmove(1);
-makeAmove(6);
