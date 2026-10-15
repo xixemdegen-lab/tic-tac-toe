@@ -152,5 +152,7 @@ function checkWin() {
         }
     }
 }
-makeAmove(0);
-makeAmove(1);
+// makeAmove(0);
+// makeAmove(1);
+
+// PHASE 2 — CONNECT THE GAME TO THE WEBPAGE

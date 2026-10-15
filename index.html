@@ -7,5 +7,43 @@
         <link rel="stylesheet" href="app.css" />
         <script src="app.js" defer></script>
     </head>
-    <body style="background-color: rgb(32, 109, 57)"></body>
+    <body>
+        <div id="game__container">
+            <h1>Tic Tac Toe</h1>
+
+            <div class="players__details">
+                <div class="player">
+                    <p>Player name: <span class="player__one-name">Player One</span></p>
+                    <p>Player marker: <span class="player__one-marker">X</span></p>
+                </div>
+
+                <div class="player">
+                    <p>Player name: <span class="player__two-name">Player Two</span></p>
+                    <p>Player marker: <span class="player__two-marker">O</span></p>
+                </div>
+            </div>
+
+            <div class="game__status">
+                <h2>Game Status: <span class="game__status-info">Ongoing....</span></h2>
+            </div>
+
+            <div class="play__turns">
+                <h2>Turns: <span class="play__turns-player">Player One</span></h2>
+            </div>
+
+            <div class="game__board">
+                <div class="cell"><p class="cell__marker">X</p></div>
+                <div class="cell"><p class="cell__marker">O</p></div>
+                <div class="cell"><p class="cell__marker">X</p></div>
+                <div class="cell"><p class="cell__marker">O</p></div>
+                <div class="cell"><p class="cell__marker">X</p></div>
+                <div class="cell"><p class="cell__marker">O</p></div>
+                <div class="cell"><p class="cell__marker">X</p></div>
+                <div class="cell"><p class="cell__marker">X</p></div>
+                <div class="cell"><p class="cell__marker">O</p></div>
+            </div>
+
+            <button class="restart__game-btn">New Round</button>
+        </div>
+    </body>
 </html>
