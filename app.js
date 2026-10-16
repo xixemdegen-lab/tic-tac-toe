@@ -40,8 +40,6 @@ const gameBoard = (() => {
 
         board[position] = marker;
         moveStatus = true;
-        console.log(board);
-        // console.log(moveStatus);
     };
     const getMoveStats = () => {
         return moveStatus;
@@ -49,7 +47,6 @@ const gameBoard = (() => {
 
     const clearBoard = () => {
         board.fill('');
-        console.log(board);
     };
 
     return {
@@ -197,8 +194,6 @@ function checkWin() {
         },
     };
 }
-// makeAmove(1);
-// makeAmove(0);
 
 // PHASE 2 — CONNECT THE GAME TO THE WEBPAGE
 const displayController = (() => {
@@ -246,7 +241,6 @@ const displayController = (() => {
                 playTurnsPlayer.textContent = 'Game Over';
             }
         }
-        // updateTurnsDisplay();
 
         // STEP 13 — CONNECT CLICKS TO GAME MOVES
 
