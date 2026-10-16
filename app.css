@@ -110,18 +110,31 @@ h1 {
     align-items: center;
     cursor: pointer;
 }
-.cell > p {
-    font-size: 1.8rem;
+.cell:hover {
+    background: #002709;
+}
+.cell__marker {
+    font-size: 3.8rem;
     font-weight: 600;
 }
 
 .restart__game-btn {
-    background: #018016;
+    background: #014e0e;
+    box-shadow: 3px 3px 1px #02f82b;
     border: none;
+    font-family: inherit;
+    color: #02f82b;
     padding: 12px 16px;
     font-size: 1.4rem;
     font-weight: 600;
     letter-spacing: 1px;
     border-radius: 6px;
     cursor: pointer;
+}
+.t-mark {
+    display: flex;
+    justify-content: center;
+    font-size: 1.6rem;
+    letter-spacing: 6px;
+    color: #01fc2b59;
 }

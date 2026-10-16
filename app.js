@@ -71,7 +71,13 @@ const gameController = (() => {
 
     let currentPlayer = newPlayer1;
     const switchPlayer = () => {
-        currentPlayer === newPlayer1 ? (currentPlayer = newPlayer2) : (currentPlayer = newPlayer1);
+        // currentPlayer === newPlayer1 ? (currentPlayer = newPlayer2) : (currentPlayer = newPlayer1);
+
+        if (currentPlayer === newPlayer1 && !gameStatus.finished && !gameStatus.haveAWinner && !gameStatus.aTie) {
+            currentPlayer = newPlayer2;
+        } else if (currentPlayer === newPlayer2 && !gameStatus.finished && !gameStatus.haveAWinner && !gameStatus.aTie) {
+            currentPlayer = newPlayer1;
+        }
     };
 
     const getCurrentPlayer = () => {
@@ -151,8 +157,75 @@ function checkWin() {
             console.log('A tie');
         }
     }
+
+    return {
+        getPlayermark() {
+            return playerMark;
+        },
+    };
 }
-// makeAmove(0);
 // makeAmove(1);
+// makeAmove(0);
 
 // PHASE 2 — CONNECT THE GAME TO THE WEBPAGE
+const displayController = (() => {
+    const playerOneName = document.querySelector('player__one-name');
+    const playerTwoName = document.querySelector('player__two-name');
+
+    const playerOneMarker = document.querySelector('player__one-marker');
+    const playerTwoMarker = document.querySelector('player__two-marker');
+
+    const gameStatusInfo = document.querySelector('.game__status-info');
+    const playTurnsPlayer = document.querySelector('.play__turns-player');
+
+    const UIBoard = document.querySelector('.game__board');
+    const restartGameBtn = document.querySelector('.restart__game-btn');
+
+    const boardArr = gameBoard.readBoard();
+
+    const updateUIBoard = (() => {
+        boardArr.forEach((cell, index) => {
+            const boardCell = document.createElement('div');
+            boardCell.dataset.position = index;
+            boardCell.classList.add('cell');
+            const cellMarker = document.createElement('p');
+            cellMarker.classList.add('cell__marker');
+            cellMarker.textContent = cell;
+
+            boardCell.appendChild(cellMarker);
+            UIBoard.appendChild(boardCell);
+        });
+
+        function updateStatusDisplay() {
+            if (gameController.getGameStatus('haveAWinner')) {
+                gameStatusInfo.textContent = `${gameController.getCurrentPlayer().playerName()} Won this round.`;
+            } else if (gameController.getGameStatus('aTie')) {
+                gameStatusInfo.textContent = 'Game ends in a tie.';
+            } else {
+                gameStatusInfo.textContent = 'Ongoing.....';
+            }
+        }
+
+        function updateTurnsDisplay() {
+            if (!gameController.getGameStatus('finished') && !gameController.getGameStatus('haveAWinner') && !gameController.getGameStatus('aTie')) {
+                playTurnsPlayer.textContent = gameController.getCurrentPlayer().playerName();
+            } else {
+                playTurnsPlayer.textContent = 'Game Over';
+            }
+        }
+        // updateTurnsDisplay();
+
+        // STEP 13 — CONNECT CLICKS TO GAME MOVES
+
+        UIBoard.addEventListener('click', (event) => {
+            const currentCell = event.target.closest('.cell');
+            const cellPosition = Number(currentCell.dataset.position);
+            const cellMarker = currentCell.querySelector('.cell__marker');
+            makeAmove(cellPosition);
+
+            cellMarker.textContent = gameBoard.readBoard()[cellPosition];
+            updateStatusDisplay();
+            updateTurnsDisplay();
+        });
+    })();
+})();
