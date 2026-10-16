@@ -35,7 +35,6 @@ const gameBoard = (() => {
     const fillBoard = (position, marker) => {
         if (!(position in board) || board[position] !== '') {
             moveStatus = false;
-            alert(`Invalid Move `);
             return;
         }
 
@@ -129,6 +128,7 @@ const gameController = (() => {
             gameStatus[key] = false;
         });
         gameBoard.clearBoard();
+        document.querySelector('.play__turns-player').textContent = currentPlayer.playerName();
     };
 
     return {
@@ -259,6 +259,15 @@ const displayController = (() => {
             cellMarker.textContent = gameBoard.readBoard()[cellPosition];
             updateStatusDisplay();
             updateTurnsDisplay();
+        });
+
+        restartGameBtn.addEventListener('click', (e) => {
+            gameController.restartGame();
+            const cellMarker = document.querySelectorAll('.cell__marker');
+            cellMarker.forEach((marker) => {
+                marker.textContent = '';
+            });
+            gameStatusInfo.textContent = 'New Round...';
         });
     })();
 })();
