@@ -1,4 +1,22 @@
 // --------------------------------PHASE 1 ---------------------
+const playersForm = document.querySelector('.players-form');
+
+playersForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const formData = new FormData(playersForm);
+    const playerX = formData.get('playerX');
+    const playerO = formData.get('playerO');
+    gameController.startGame(playerX, playerO);
+    switchScreen();
+});
+
+function switchScreen() {
+    const gameScreen = document.querySelector('.begin__game');
+    const onboardScreen = document.querySelector('.onboard__screen');
+
+    onboardScreen.style.display = 'none';
+    gameScreen.style.display = 'flex';
+}
 
 // STEP 1 — GAMEBOARD MODULE
 const gameBoard = (() => {
@@ -61,18 +79,32 @@ const createPlayer = (name, marker) => {
 
 // STEP 3 — GAME CONTROLLER MODULE
 const gameController = (() => {
-    const newPlayer1 = createPlayer('PlayerX', 'x');
-    const newPlayer2 = createPlayer('PlayerO', 'o');
+    let currentPlayer;
+    const displayPlayer1Name = document.querySelector('.player__one-name');
+    const displayPlayer2Name = document.querySelector('.player__two-name');
+
+    const displayPlayer1Marker = document.querySelector('.player__one-marker');
+    const displayPlayer2Marker = document.querySelector('.player__two-marker');
     const gameStatus = {
         finished: false,
         haveAWinner: false,
         aTie: false,
     };
+    let newPlayer1;
+    let newPlayer2;
+    const startGame = (player1, player2) => {
+        newPlayer1 = createPlayer(player1, 'x');
+        newPlayer2 = createPlayer(player2, 'o');
 
-    let currentPlayer = newPlayer1;
+        currentPlayer = newPlayer1;
+        displayPlayer1Name.textContent = newPlayer1.playerName();
+        displayPlayer2Name.textContent = newPlayer2.playerName();
+        displayPlayer1Marker.textContent = newPlayer1.playerMarker().toUpperCase();
+        displayPlayer2Marker.textContent = newPlayer2.playerMarker().toUpperCase();
+        document.querySelector('.play__turns-player').textContent = currentPlayer.playerName();
+    };
+
     const switchPlayer = () => {
-        // currentPlayer === newPlayer1 ? (currentPlayer = newPlayer2) : (currentPlayer = newPlayer1);
-
         if (currentPlayer === newPlayer1 && !gameStatus.finished && !gameStatus.haveAWinner && !gameStatus.aTie) {
             currentPlayer = newPlayer2;
         } else if (currentPlayer === newPlayer2 && !gameStatus.finished && !gameStatus.haveAWinner && !gameStatus.aTie) {
@@ -100,6 +132,7 @@ const gameController = (() => {
     };
 
     return {
+        startGame,
         getCurrentPlayer,
         setGameStatus,
         getGameStatus,
@@ -145,7 +178,7 @@ function checkWin() {
     if (win) {
         gameController.setGameStatus('haveAWinner', true);
         gameController.setGameStatus('finished', true);
-        console.log(playerMark + ' ' + 'wins');
+        console.log(gameController.getCurrentPlayer().playerName() + ' ' + 'wins');
     } else {
         const tie = seeBoard.every((cell) => {
             return cell !== '';

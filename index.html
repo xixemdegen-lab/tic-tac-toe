@@ -11,30 +11,55 @@
         <div id="game__container">
             <h1>Tic Tac Toe</h1>
 
-            <div class="players__details">
-                <div class="player">
-                    <p>Player name: <span class="player__one-name">PlayerX</span></p>
-                    <p>Player marker: <span class="player__one-marker">X</span></p>
+            <div class="onboard__screen">
+                <div class="welcome__message">
+                    <h2>Welcome to the onboarding screen of Soorek's Tic Tac Toe project from TOP.</h2>
+
+                    <p>Players fill in your details to play.. Enjoy the Game!</p>
                 </div>
 
-                <div class="player">
-                    <p>Player name: <span class="player__two-name">PlayerO</span></p>
-                    <p>Player marker: <span class="player__two-marker">O</span></p>
+                <form class="players-form">
+                    <div class="input-container">
+                        <label for="player-x">Who will be player X?</label>
+                        <input type="text" name="playerX" id="player-x" placeholder="Enter a name..." required />
+                    </div>
+
+                    <div class="input-container">
+                        <label for="player-o">Who will be player O?</label>
+                        <input type="text" name="playerO" id="player-o" placeholder="Enter a name..." required />
+                    </div>
+
+                    <button>Start Game</button>
+                </form>
+            </div>
+
+            <div class="begin__game">
+                <div class="players__details">
+                    <div class="player">
+                        <p>Player name: <span class="player__one-name">PlayerX</span></p>
+                        <p>Player marker: <span class="player__one-marker">X</span></p>
+                    </div>
+
+                    <div class="player">
+                        <p>Player name: <span class="player__two-name">PlayerO</span></p>
+                        <p>Player marker: <span class="player__two-marker">O</span></p>
+                    </div>
                 </div>
+
+                <div class="game__status">
+                    <h2>Game Status: <span class="game__status-info"></span></h2>
+                </div>
+
+                <div class="play__turns">
+                    <h2>Turns: <span class="play__turns-player"></span></h2>
+                </div>
+
+                <div class="game__board"></div>
+
+                <button class="restart__game-btn">New Round</button>
             </div>
-
-            <div class="game__status">
-                <h2>Game Status: <span class="game__status-info"></span></h2>
-            </div>
-
-            <div class="play__turns">
-                <h2>Turns: <span class="play__turns-player"></span></h2>
-            </div>
-
-            <div class="game__board"></div>
-
-            <button class="restart__game-btn">New Round</button>
         </div>
+
         <p class="t-mark">Soorek Tic-Tac-Toe project</p>
     </body>
 </html>
